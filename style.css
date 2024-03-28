@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+div {
+  position: absolute;
+  width: 50%;
+  height: 100vh;
+  padding-left: 10vw;
+  padding-top: 20vh;
+}
+
+h1 {
+  color: #31823e;
+  font-size: 10vh;
+  font-weight: bold;
+}
+
+p {
+  width: 80%;
+}

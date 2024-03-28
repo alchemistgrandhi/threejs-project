@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Diagonal Scroll Image ThreeJs</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="container">
+	<h1>The Nature</h1>
+	<p>
+Sed sed lorem in turpis rhoncus mattis sit amet et augue. Mauris nunc tortor, mattis vel orci eget, dignissim malesuada tortor. Vivamus in venenatis felis. Vestibulum tristique libero ac mi malesuada posuere eu egestas mauris. Ut pulvinar vehicula viverra. Integer pulvinar lobortis nulla, nec pretium elit sagittis et. Integer aliquam risus dapibus, posuere augue mattis, posuere felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;</p>
+	</div>
+<canvas id="webgl"></canvas> 
+
+<script>
+	const vertexShader = `
+	uniform float uTime;
+	varying vec2 vuv;
+	float PI = 3.141592653589793238;
+	
+	void main() {
+	 vuv = (uv - vec2(0.5))*0.9 + vec2(0.5);
+		vec3 pos= position;
+		pos.y += sin(PI*uv.x)*0.03;
+		pos.z += sin(PI*uv.x)*0.03;
+		pos.y += sin(uTime) * 0.02;
+		vuv.y -= sin(uTime) * 0.02;
+		
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+	}
+`;
+const fragmentShader = `
+uniform sampler2D uImage;
+uniform float opacity;
+varying vec2 vuv;
+
+	void main() {
+		vec4 color = texture2D(uImage, vuv);
+		gl_FragColor = color;
+		gl_FragColor.a = opacity; 
+	}
+`;
+</script>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/gsap@3.2.6/dist/gsap.min.js'></script><script type="module" src="./script.js"></script>
+
+</body>
+</html>
